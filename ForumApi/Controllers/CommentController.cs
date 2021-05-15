@@ -9,24 +9,57 @@ using System.Threading.Tasks;
 namespace ForumApi.Controllers
 {
     using ForumApi.Model;
+    using ForumApi.Interface;
     [EnableCors("MyPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class CommentController : ControllerBase
     {
-        public List<Post> posts = new List<Post>
+        public IPost post_;
+        public IComment comment_;
+        public ILike like_;
+        public IReport report_;
+        public CommentController(IPost post,IComment comment,ILike like,IReport report)
         {
-            new Post{Id=1,AuthorId=1,PostDate=DateTime.Parse("2021-03-04 12:32"),Title="<h3>XXXXXXXXXXX</h3>",Content="<p>VVVVVVVVVVVVV</p>" }
-        };
-        public List<Comment> comments = new List<Comment>
+            post_ = post;
+            comment_ = comment;
+            like_ = like;
+            report_ = report;
+        }
+    
+        [HttpPost("addComment")]
+        public bool AddComment([FromBody] Comment comment)
         {
-            new Comment{Id=1,PostId=1,AuthorId=1,CommentatorId=2,CommentDate=DateTime.Parse("2021-03-04 13:05"),Content="OKKKK"},
-            new Comment{Id=2,PostId=1,AuthorId=1,CommentatorId=3,CommentDate=DateTime.Parse("2021-03-04 13:15"),Content="okkkkk"},
-            new Comment{Id=3,PostId=1,AuthorId=2,CommentatorId=3,CommentDate=DateTime.Parse("2021-03-04 13:33"),Content="YYYYYYY"}
-        };
-        public List<Like> likes = new List<Like>
+            return comment_.AddComment(comment);
+        }
+
+        [HttpPost("addReport")]
+        public bool AddReport([FromBody] Report report)
         {
-            new Like{Id=1,AuthorId=1,CommentId=0,PostId=1,SupportId=2},
-        };
+            return report_.AddReport(report);
+        }
+
+        [HttpGet("getPost/{nid:int}")]
+        public PostDto GetPost([FromRoute] int nid)
+        {
+            return post_.GetPost(nid);
+        }
+
+        [HttpGet("getComments/{nid:int}")]
+        public List<CommentDto> GetComments([FromRoute] int nid)
+        {
+            return comment_.GetComments(nid);
+        }
+
+        [HttpPost("addLike")]
+        public bool AddLike([FromBody] Like like)
+        {
+            return like_.AddLike(like);
+        }
+        [HttpPost("deleteLike/{postId:int}&{commentId:int}")]
+        public bool DeleteLike([FromRoute] int postId,[FromRoute] int commentId)
+        {
+            return like_.DeleteLike(postId, commentId);
+        }
     }
 }

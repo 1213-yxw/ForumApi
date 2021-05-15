@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 
 namespace ForumApi
 {
+    using Microsoft.EntityFrameworkCore;
+    using ForumApi.Interface;
+    using ForumApi.Services;
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -40,6 +43,15 @@ namespace ForumApi
                          .AllowAnyMethod();
                 });
             });
+            services.AddScoped<IPost, PostService>();
+            services.AddScoped<IComment, CommentService>();
+            services.AddScoped<ILike, LikeService>();
+            services.AddScoped<IReport, ReportService>();
+            services.AddRouting();
+            services.AddDbContext<ForumDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("conn"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,7 +71,7 @@ namespace ForumApi
             app.UseAuthorization();
 
             app.UseCors(builder=> {
-                builder.AllowAnyOrigin();
+                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
             });
 
             app.UseEndpoints(endpoints =>
