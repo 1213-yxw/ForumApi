@@ -16,7 +16,8 @@ namespace ForumApi.Services
         }
         public bool AddReport(Report report)
         {
-            throw new NotImplementedException();
+            dbContext_.Reports.Add(report);
+            return dbContext_.SaveChanges()>0;
         }
     }
 }

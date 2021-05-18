@@ -16,17 +16,29 @@ namespace ForumApi.Services
         }
         public bool AddLike(Like like)
         {
+           var item = this.GetLike(like.PostId,like.CommentId,like.SupportId);
+          if(item==null){
             dbContext_.Likes.Add(like);
+            return dbContext_.SaveChanges()>0;
+          }else{return false;}
+        }
+
+        public bool DeleteLike(int postId,int commentId,int supportId)
+        {
+            var like = (from l in dbContext_.Likes
+                        where l.PostId == postId && l.CommentId == commentId && l.SupportId == supportId
+                        select l).FirstOrDefault();
+            dbContext_.Likes.Attach(like);
+            dbContext_.Likes.Remove(like);
             return dbContext_.SaveChanges()>0;
         }
 
-        public bool DeleteLike(int postId, int commentId)
-        {
-            var like = (from l in dbContext_.Likes
-                        where l.PostId == postId && l.CommentId == commentId
-                        select l).FirstOrDefault();
-            dbContext_.Likes.Remove(like);
-            return dbContext_.SaveChanges()>0;
+       public Like GetLike(int postId,int commentId,int supportId)
+       {
+             var like=(from l in dbContext_.Likes
+                     where l.PostId==postId&&l.CommentId==commentId&&l.SupportId==supportId
+                     select l).FirstOrDefault();
+              return like;
         }
 
         public int GetLikes(int postId, int commentId)
@@ -34,12 +46,9 @@ namespace ForumApi.Services
             int sum = 0;
             foreach (var like in dbContext_.Likes)
             {
-                if (like.PostId == postId)
+                if (like.PostId == postId&&like.CommentId==commentId)
                 {
-                    if (like.CommentId == commentId)
-                    {
-                        sum += 1;
-                    }
+                    sum += 1;
                 }
             }
             return sum;
