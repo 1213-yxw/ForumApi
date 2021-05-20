@@ -16,11 +16,13 @@ namespace ForumApi.Services
         }
         public bool AddLike(Like like)
         {
-           var item = this.GetLike(like.PostId,like.CommentId,like.SupportId);
-          if(item==null){
-            dbContext_.Likes.Add(like);
-            return dbContext_.SaveChanges()>0;
-          }else{return false;}
+            var item = this.GetLike(like.PostId, like.CommentId, like.SupportId);
+          if(item){
+                return false;
+          }else{
+                dbContext_.Likes.Add(like);
+                return dbContext_.SaveChanges() > 0;
+            }
         }
 
         public bool DeleteLike(int postId,int commentId,int supportId)
@@ -33,12 +35,19 @@ namespace ForumApi.Services
             return dbContext_.SaveChanges()>0;
         }
 
-       public Like GetLike(int postId,int commentId,int supportId)
+       public bool GetLike(int postId,int commentId,int supportId)
        {
              var like=(from l in dbContext_.Likes
                      where l.PostId==postId&&l.CommentId==commentId&&l.SupportId==supportId
                      select l).FirstOrDefault();
-              return like;
+            if (like == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public int GetLikes(int postId, int commentId)

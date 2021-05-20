@@ -16,8 +16,8 @@ namespace ForumApi.Services
         }
         public bool AddReport(Report report)
         {
-            dbContext_.Reports.Add(report);
-            return dbContext_.SaveChanges()>0;
+             dbContext_.Reports.Add(report);
+             return dbContext_.SaveChanges() > 0;
         }
     }
 }

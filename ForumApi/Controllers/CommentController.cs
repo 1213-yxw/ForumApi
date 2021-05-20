@@ -53,7 +53,7 @@ namespace ForumApi.Controllers
 
         [HttpGet]
         [Route("~/api/[controller]/getLike/{postId:int}/{commentId:int}/{supportId:int}")]
-        public Like GetLike([FromRoute] int postId,[FromRoute] int commentId,[FromRoute]int supportId)
+        public bool GetLike([FromRoute] int postId,[FromRoute] int commentId,[FromRoute]int supportId)
         {
             return like_.GetLike(postId,commentId,supportId);
         }
