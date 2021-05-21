@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ForumApi.Migrations
 {
     [DbContext(typeof(ForumDbContext))]
-    [Migration("20210515062639_Create")]
+    [Migration("20210516044941_Create")]
     partial class Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,7 +38,7 @@ namespace ForumApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Admin");
+                    b.ToTable("Admins");
                 });
 
             modelBuilder.Entity("ForumApi.Model.Comment", b =>
