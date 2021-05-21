@@ -23,13 +23,13 @@ namespace ForumApi.Services
                             where p.Id == id
                             select p
                         ).FirstOrDefault();
-           // var author = this.GetAuthor(postItem.AuthorId);
+            var author = GetUser(postItem.AuthorId);
             PostDto postDto = new PostDto
             {
                 Id = postItem.Id,
                 AuthorId = postItem.AuthorId,
-                //AuthorName = author.AuthorName,
-                //AuthorAvatar = author.Avatar,
+                AuthorName = author.UserName,
+                AuthorAvatar = author.Avatar,
                 PostDate = postItem.PostDate,
                 Title = postItem.Title,
                 Content = postItem.Content,

@@ -51,15 +51,22 @@ namespace ForumApi.Controllers
             return comment_.GetComments(nid);
         }
 
+        [HttpGet]
+        [Route("~/api/[controller]/getLike/{postId:int}/{commentId:int}/{supportId:int}")]
+        public bool GetLike([FromRoute] int postId,[FromRoute] int commentId,[FromRoute]int supportId)
+        {
+            return like_.GetLike(postId,commentId,supportId);
+        }
+
         [HttpPost("addLike")]
         public bool AddLike([FromBody] Like like)
         {
             return like_.AddLike(like);
         }
-        [HttpPost("deleteLike/{postId:int}&{commentId:int}")]
-        public bool DeleteLike([FromRoute] int postId,[FromRoute] int commentId)
+        [HttpGet("deleteLike/{postId:int}/{commentId:int}/{supportId:int}")]
+        public bool DeleteLike([FromRoute] int postId,[FromRoute]int commentId,[FromRoute]int supportId)
         {
-            return like_.DeleteLike(postId, commentId);
+            return like_.DeleteLike(postId,commentId,supportId);
         }
     }
 }

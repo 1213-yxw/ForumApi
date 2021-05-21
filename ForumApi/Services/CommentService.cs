@@ -30,18 +30,18 @@ namespace ForumApi.Services
                             select c
                             ).ToList();
             List<CommentDto> commentDtos = new List<CommentDto>();
-            foreach (var comment in dbContext_.Comments)
+            foreach (var comment in comments)
             {
-                //var reviewer = this.GetAuthor(comment.ReviewerId);
+                var reviewer = GetUser(comment.ReviewerId);
                 CommentDto commentDto = new CommentDto
                 {
                     Id = comment.Id,
                     PostId = comment.PostId,
                     ReviewedId = comment.ReviewedId,
-                    //ReviewedName = this.GetAuthor(comment.ReviewedId).AuthorName,
+                    ReviewedName = GetUser(comment.ReviewedId).UserName,
                     ReviewerId = comment.ReviewerId,
-                    //ReviewerName = reviewer.AuthorName,
-                   // ReviewerAvatar = reviewer.Avatar,
+                    ReviewerName = reviewer.UserName,
+                    ReviewerAvatar = reviewer.Avatar,
                     CommentDate = comment.CommentDate,
                     Content = comment.Content,
                     Likes = likeService_.GetLikes(comment.PostId, comment.Id)
@@ -49,6 +49,14 @@ namespace ForumApi.Services
                 commentDtos.Add(commentDto);
             }
             return commentDtos;
+        }
+
+        public User GetUser(int id)
+        {
+            var user = (from u in dbContext_.Users
+                        where u.Id == id
+                        select u).FirstOrDefault();
+            return user;
         }
     }
 }
