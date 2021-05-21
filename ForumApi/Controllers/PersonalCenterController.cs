@@ -23,14 +23,14 @@ namespace ForumApi.Controllers
             menu_ = menu;
         }
 
-        //https://localhost:5001/api/PersonalCenter
+        
         [HttpGet]
         public List<Menu> GetMenus()
         {
             return menu_.GetMenus();
         }
         //无法从数据库中取出所有属性
-        [HttpGet]
+        [HttpGet("getPosts")]
         public List<PostDto> GetPosts()
         {
             return post_.GetPosts();

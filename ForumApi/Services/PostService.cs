@@ -40,22 +40,29 @@ namespace ForumApi.Services
 
         public List<PostDto> GetPosts()
         {
-            var postAll = dbContext_.Posts.ToList();
+            var posts = (from p in dbContext_.Posts
+                         select p).ToList();
+            Console.WriteLine(posts.Count);
             List<PostDto> result = new List<PostDto>();
-            postAll.ForEach(p =>
+            foreach (var p in posts)
             {
-                PostDto postDto = new PostDto
-                {
-                    Id = p.Id,
-                    AuthorId = p.AuthorId,
-                    //AuthorAvatar=author.Avatar,
-                    PostDate = p.PostDate,
-                    Title = p.Title,
-                    Content = p.Content
-                };
-                result.Add(postDto);
-            });
+                    var author = GetUser(p.AuthorId);
+                    PostDto postDto = new PostDto()
+                    {
+                        Id = p.Id,
+                        AuthorId = p.AuthorId,
+                        AuthorAvatar = author.Avatar,
+                        AuthorName = author.UserName,
+                        PostDate = p.PostDate,
+                        Title = p.Title,
+                        Content = p.Content,
+                        Likes = likeService_.GetLikes(p.Id, 0)
+                    };
+                    result.Add(postDto);
+                }
+            
             return result;
+            
         }
 
         public bool AddPost(Post post)
@@ -71,6 +78,13 @@ namespace ForumApi.Services
                         select p).FirstOrDefault();
             dbContext_.Posts.Remove(post);
             return dbContext_.SaveChanges() > 0;
+        }
+        public User GetUser(int id)
+        {
+            var user = (from u in dbContext_.Users
+                        where u.Id == id
+                        select u).FirstOrDefault();
+            return user;
         }
     }
 }
