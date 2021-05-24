@@ -24,28 +24,34 @@ namespace ForumApi.Controllers
         }
 
         
-        [HttpGet]
+        [HttpGet("getMenus")]
         public List<Menu> GetMenus()
         {
             return menu_.GetMenus();
         }
-        //无法从数据库中取出所有属性
-        [HttpGet("getPosts")]
-        public List<PostDto> GetPosts()
+
+        [HttpGet("getPosts/{authorId:int}")]
+        public List<PostDto> GetPosts([FromRoute] int authorId)
         {
-            return post_.GetPosts();
+            return post_.GetPosts(authorId);
+        }
+
+        [HttpGet("getPostsAll")]
+        public List<PostDto> GetPostsAll()
+        {
+            return post_.GetPostsAll();
         }
 
         [HttpPost("addPost")]
-        public bool AddPost([FromBody] Post post)
-        {
+        public bool AddPost([FromBody] Post post) { 
+            
             return post_.AddPost(post);
         }
 
-        [HttpPost("deletePost/{authorId:int}")]
-        public bool DeletePost([FromRoute] int authorId)
+        [HttpGet("deletePost/{postId:int}")]
+        public bool DeletePost([FromRoute] int postId)
         {
-            return post_.DeletePost(authorId);
+            return post_.DeletePost(postId);
         }
     }
 }

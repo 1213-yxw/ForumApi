@@ -38,31 +38,29 @@ namespace ForumApi.Services
             return postDto;
         }
 
-        public List<PostDto> GetPosts()
+        public List<PostDto> GetPosts(int authorId)
         {
             var posts = (from p in dbContext_.Posts
+                         where p.AuthorId==authorId
                          select p).ToList();
-            Console.WriteLine(posts.Count);
             List<PostDto> result = new List<PostDto>();
             foreach (var p in posts)
             {
-                    var author = GetUser(p.AuthorId);
-                    PostDto postDto = new PostDto()
-                    {
-                        Id = p.Id,
-                        AuthorId = p.AuthorId,
-                        AuthorAvatar = author.Avatar,
-                        AuthorName = author.UserName,
-                        PostDate = p.PostDate,
-                        Title = p.Title,
-                        Content = p.Content,
-                        Likes = likeService_.GetLikes(p.Id, 0)
-                    };
-                    result.Add(postDto);
-                }
-            
+                var author = GetUser(authorId);
+                PostDto postDto = new PostDto
+                {
+                    Id = p.Id,
+                    AuthorId = p.AuthorId,
+                    AuthorAvatar = author.Avatar,
+                    AuthorName = author.UserName,
+                    PostDate = p.PostDate,
+                    Title = p.Title,
+                    Content = p.Content,
+                    Likes = likeService_.GetLikes(p.Id, 0)
+                };
+                result.Add(postDto);
+            }
             return result;
-            
         }
 
         public bool AddPost(Post post)
@@ -71,13 +69,18 @@ namespace ForumApi.Services
             return dbContext_.SaveChanges() > 0;
         }
 
-        public bool DeletePost(int authorId)
+        public bool DeletePost(int postId) 
         {
             var post = (from p in dbContext_.Posts
-                        where p.AuthorId == authorId
+                        where p.Id == postId
                         select p).FirstOrDefault();
-            dbContext_.Posts.Remove(post);
-            return dbContext_.SaveChanges() > 0;
+            if (post == null) { return false; }
+            else
+            {
+                dbContext_.Posts.Attach(post);
+                dbContext_.Posts.Remove(post);
+                return dbContext_.SaveChanges() > 0;
+            }
         }
         public User GetUser(int id)
         {
@@ -85,6 +88,37 @@ namespace ForumApi.Services
                         where u.Id == id
                         select u).FirstOrDefault();
             return user;
+        }
+
+        public User GetUsers()
+        {
+            var users = (from u in dbContext_.Users
+                         select u).FirstOrDefault();
+            return users;
+        }
+
+        public List<PostDto> GetPostsAll()
+        {
+            var postsAll = (from p in dbContext_.Posts
+                            select p).ToList();
+            List<PostDto> result = new List<PostDto>();
+            foreach(var p in postsAll)
+            {
+                var author = GetUsers();
+                PostDto postDto = new PostDto
+                {
+                    Id = p.Id,
+                    AuthorId = p.AuthorId,
+                    AuthorAvatar = author.Avatar,
+                    AuthorName = author.UserName,
+                    PostDate = p.PostDate,
+                    Title = p.Title,
+                    Content = p.Content,
+                    Likes = likeService_.GetLikes(p.Id, 0)
+                };
+                result.Add(postDto);
+            }
+            return result;
         }
     }
 }

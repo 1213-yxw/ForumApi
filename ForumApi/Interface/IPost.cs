@@ -9,8 +9,9 @@ namespace ForumApi.Interface
     public interface IPost
     {
         PostDto GetPost(int id);
-        abstract List<PostDto> GetPosts();
+        abstract List<PostDto> GetPosts(int authorId);
+        abstract List<PostDto> GetPostsAll();
         bool AddPost(Post post);
-        bool DeletePost(int authorId);
+        bool DeletePost(int postId);
     }
 }
