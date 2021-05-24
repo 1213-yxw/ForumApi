@@ -49,5 +49,52 @@ namespace ForumApiTest
             var result = service.Register(user);
             Assert.False(result);
         }
+        [Fact]
+        public async void AddUser()
+        {
+            var content = await GetSqlServerDbContextAsync();
+            var service = new UserService(content);
+            User user = new User()
+            {
+                UserName = "小明",
+                Password = "123"
+            };
+            var result = service.AddUser(user);
+            Assert.True(result);
+        }
+
+        [Fact]
+        public async void UpdateUser()
+        {
+            var content = await GetSqlServerDbContextAsync();
+            var service = new UserService(content);
+            User user = new User()
+            {
+                Id=3,
+                UserName = "王五",
+                Password = "123567",
+                Avatar= "images/profilepicture03.jpg"
+            };
+            var result = service.UpdateUser(user);
+            Assert.True(result);
+        }
+
+        [Fact]
+        public async void DeleteUser()
+        {
+            var content = await GetSqlServerDbContextAsync();
+            var service = new UserService(content);
+            var result = service.DeleteUser(2);
+            Assert.True(result);
+        }
+
+        [Fact]
+        public async void UpdateAvatar()
+        {
+            var content = await GetSqlServerDbContextAsync();
+            var service = new UserService(content);
+            var result = service.UpdateAvatar(1, "xxxx");
+            Assert.True(result);
+        }
     }
 }

@@ -10,5 +10,9 @@ namespace ForumApi.Interface
     {
        bool Login(string userName, string password);
        bool Register(User user);
+       bool AddUser(User user);
+       bool UpdateUser(User user);
+       bool DeleteUser(int id);
+       bool UpdateAvatar(int id,string avatar);
     }
 }
