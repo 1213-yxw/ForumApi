@@ -48,6 +48,7 @@ namespace ForumApi
             services.AddScoped<ILike, LikeService>();
             services.AddScoped<IReport, ReportService>();
             services.AddScoped<IMenu, MenuService>();
+            services.AddScoped<IUser, UserService>();
             services.AddRouting();
             services.AddDbContext<ForumDbContext>(options =>
             {

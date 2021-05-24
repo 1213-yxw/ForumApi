@@ -30,25 +30,41 @@ namespace ForumApi.Controllers
         [HttpPost("addComment")]
         public bool AddComment([FromBody] Comment comment)
         {
-            return comment_.AddComment(comment);
+            if (comment == null) { return false; }
+            else
+            {
+                return comment_.AddComment(comment);
+            }
         }
 
         [HttpPost("addReport")]
         public bool AddReport([FromBody] Report report)
         {
-            return report_.AddReport(report);
+            if (report == null) { return false; }
+            else
+            {
+                return report_.AddReport(report);
+            }
         }
 
         [HttpGet("getPost/{nid:int}")]
-        public PostDto GetPost([FromRoute] int nid)
+        public PostDto GetPost([FromRoute] int? nid)
         {
-            return post_.GetPost(nid);
+            if (nid == null) { return null; }
+            else
+            {
+                return post_.GetPost(nid.Value);
+            }
         }
 
         [HttpGet("getComments/{nid:int}")]
-        public List<CommentDto> GetComments([FromRoute] int nid)
+        public List<CommentDto> GetComments([FromRoute] int? nid)
         {
-            return comment_.GetComments(nid);
+            if (nid == null) { return null; }
+            else
+            {
+                return comment_.GetComments(nid.Value);
+            }
         }
 
         [HttpGet]
@@ -61,7 +77,11 @@ namespace ForumApi.Controllers
         [HttpPost("addLike")]
         public bool AddLike([FromBody] Like like)
         {
-            return like_.AddLike(like);
+            if (like == null) { return false; }
+            else
+            {
+                return like_.AddLike(like);
+            }
         }
         [HttpGet("deleteLike/{postId:int}/{commentId:int}/{supportId:int}")]
         public bool DeleteLike([FromRoute] int postId,[FromRoute]int commentId,[FromRoute]int supportId)

@@ -34,7 +34,7 @@ namespace ForumApi
         public DbSet<Report> Reports { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Admin> Admins { get; set; }
-        public DbSet<Menu> Menus { get; set; }
+        public DbSet<Menu> Menus{ get; set; }
 
     }
 }
