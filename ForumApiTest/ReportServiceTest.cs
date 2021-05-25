@@ -50,5 +50,14 @@ namespace ForumApiTest
             var result = reportService.AddReport(report);
             Assert.True(result);
         }
+
+        [Fact]
+        public async void DeleteReport()
+        {
+            var content = await GetSqlServerDbContextAsync();
+            var reportService = new ReportService(content);
+            var result = reportService.DeleteReport(1);
+            Assert.True(result);
+        }
     }
 }
