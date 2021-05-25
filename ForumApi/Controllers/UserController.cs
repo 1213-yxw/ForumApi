@@ -57,8 +57,8 @@ namespace ForumApi.Controllers
             }
         }
 
-        [HttpGet("updateAvatar/{nid:int}/{avatar:string}")]
-        public bool UpdateAvatar([FromRoute]int? nid,[FromRoute]string avatar)
+        [HttpGet("updateAvatar/{nid:int}/{avatar}")]
+        public bool UpdateAvatar([FromRoute]int? nid,string avatar)
         {
             if (nid==null&&avatar == null) { return false; }
             else

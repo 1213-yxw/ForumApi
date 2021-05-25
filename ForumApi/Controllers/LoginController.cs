@@ -21,10 +21,12 @@ namespace ForumApi.Controllers
         {
             userService_ = user;
         }
-        [HttpGet("login/{userName:string}/{password:string}")]
-        public bool Login([FromRoute]string userName,[FromRoute] string password)
+
+        [HttpGet("login/{userName}/{password}")]
+        public bool Login(string userName,string password)
         {
-            return userService_.Login(userName, password);
+            
+            return userService_.Login(userName,password);
         }
 
         [HttpPost("register")]

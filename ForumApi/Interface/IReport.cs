@@ -9,5 +9,6 @@ namespace ForumApi.Interface
     public interface IReport
     {
         bool AddReport(Report report);
+        bool DeleteReport(int id);
     }
 }
