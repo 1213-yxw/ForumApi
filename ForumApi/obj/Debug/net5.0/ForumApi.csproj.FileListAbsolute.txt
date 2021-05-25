@@ -123,4 +123,3 @@ D:\.net\vs2019(pratice)\studentProject\大三下\期末团队项目（Team）\Fo
 D:\.net\vs2019(pratice)\studentProject\大三下\期末团队项目（Team）\ForumApi\ForumApi\obj\Debug\net5.0\ref\ForumApi.dll
 D:\.net\vs2019(pratice)\studentProject\大三下\期末团队项目（Team）\ForumApi\ForumApi\obj\Debug\net5.0\ForumApi.pdb
 D:\.net\vs2019(pratice)\studentProject\大三下\期末团队项目（Team）\ForumApi\ForumApi\obj\Debug\net5.0\ForumApi.genruntimeconfig.cache
-D:\.net\vs2019(pratice)\studentProject\大三下\期末团队项目（Team）\ForumApi\ForumApi\obj\Debug\net5.0\ForumApi.csprojAssemblyReference.cache
