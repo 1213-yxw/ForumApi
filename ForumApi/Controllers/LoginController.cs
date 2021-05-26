@@ -23,7 +23,7 @@ namespace ForumApi.Controllers
         }
 
         [HttpGet("login/{userName}/{password}")]
-        public bool Login(string userName,string password)
+        public User Login(string userName,string password)
         {
             
             return userService_.Login(userName,password);
