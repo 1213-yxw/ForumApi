@@ -36,8 +36,8 @@ namespace ForumApiTest
         };
         public List<Menu> menudata = new List<Menu>
         {
-            new Menu{Id=1,Url="xxx/yyy",Text="菜单1"},
-            new Menu{Id=2,Url="xxx/zzz",Text="菜单2"}
+            new Menu{Id=1,Url="/xxx/yyy",Text="菜单1"},
+            new Menu{Id=2,Url="/xxx/zzz",Text="菜单2"}
         };
         private async Task<ForumDbContext> GetSqlServerDbContextAsync()
         {
@@ -49,6 +49,7 @@ namespace ForumApiTest
             sqlServerDbContext.Users.AddRange(userdata);
             sqlServerDbContext.Comments.AddRange(commentdata);
             sqlServerDbContext.Likes.AddRange(likedata);
+            sqlServerDbContext.Menus.AddRange(menudata);
             await sqlServerDbContext.SaveChangesAsync();
             return sqlServerDbContext;
         }
@@ -66,7 +67,7 @@ namespace ForumApiTest
         {
             var context = await GetSqlServerDbContextAsync();
             var postService = new PostService(context);
-            var result = postService.GetUser(1);
+            var result = postService.GetUser(3);
             Assert.NotNull(result);
         }
 
@@ -85,7 +86,7 @@ namespace ForumApiTest
             var content = await GetSqlServerDbContextAsync();
             var postService = new PostService(content);
             var result = postService.GetPostsAll();
-            Assert.NotEmpty(result);
+            Assert.NotNull(result);
         }
 
         [Fact]
@@ -110,7 +111,7 @@ namespace ForumApiTest
         {
             var content = await GetSqlServerDbContextAsync();
             var postService = new PostService(content);
-            var result = postService.DeletePost(1);
+            var result = postService.DeletePost(3);
             Assert.True(result);
         }
 
