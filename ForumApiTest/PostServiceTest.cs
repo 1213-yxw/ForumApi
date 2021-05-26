@@ -49,6 +49,7 @@ namespace ForumApiTest
             sqlServerDbContext.Users.AddRange(userdata);
             sqlServerDbContext.Comments.AddRange(commentdata);
             sqlServerDbContext.Likes.AddRange(likedata);
+            sqlServerDbContext.Menus.AddRange(menudata);
             await sqlServerDbContext.SaveChangesAsync();
             return sqlServerDbContext;
         }

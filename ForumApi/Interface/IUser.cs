@@ -8,7 +8,7 @@ namespace ForumApi.Interface
     using ForumApi.Model;
     public interface IUser
     {
-       bool Login(string userName, string password);
+       User Login(string userName, string password);
        bool Register(User user);
        bool AddUser(User user);
        bool UpdateUser(User user);

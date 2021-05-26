@@ -41,19 +41,12 @@ namespace ForumApi.Services
             return dbContext_.SaveChanges() > 0;
         }
 
-        public bool Login(string userName, string password)
+        public User Login(string userName, string password)
         {
             var user = (from u in dbContext_.Users
                         where u.UserName == userName && u.Password == password
                         select u).FirstOrDefault();
-            if (user == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return user;
         }
 
         public bool Register(User user)

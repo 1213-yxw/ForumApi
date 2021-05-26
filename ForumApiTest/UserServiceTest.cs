@@ -34,7 +34,7 @@ namespace ForumApiTest
             var content = await GetSqlServerDbContextAsync();
             var service = new UserService(content);
             var result = service.Login("张三", "123");
-            Assert.True(result);
+            Assert.NotNull(result);
         }
         [Fact]
         public async void Register()

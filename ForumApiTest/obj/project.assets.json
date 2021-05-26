@@ -8319,32 +8319,34 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\DELL\\.nuget\\packages\\": {}
+    "C:\\Users\\PC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\.net\\vs2019(pratice)\\studentProject\\大三下\\期末团队项目（Team）\\ForumApi\\ForumApiTest\\ForumApiTest.csproj",
+      "projectUniqueName": "F:\\ForumApi\\ForumApiTest\\ForumApiTest.csproj",
       "projectName": "ForumApiTest",
-      "projectPath": "D:\\.net\\vs2019(pratice)\\studentProject\\大三下\\期末团队项目（Team）\\ForumApi\\ForumApiTest\\ForumApiTest.csproj",
-      "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "D:\\.net\\vs2019(pratice)\\studentProject\\大三下\\期末团队项目（Team）\\ForumApi\\ForumApiTest\\obj\\",
+      "projectPath": "F:\\ForumApi\\ForumApiTest\\ForumApiTest.csproj",
+      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+      "outputPath": "F:\\ForumApi\\ForumApiTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\.net\\vs2019(pratice)\\studentProject\\大三下\\期末团队项目（Team）\\ForumApi\\ForumApi\\ForumApi.csproj": {
-              "projectPath": "D:\\.net\\vs2019(pratice)\\studentProject\\大三下\\期末团队项目（Team）\\ForumApi\\ForumApi\\ForumApi.csproj"
+            "F:\\ForumApi\\ForumApi\\ForumApi.csproj": {
+              "projectPath": "F:\\ForumApi\\ForumApi\\ForumApi.csproj"
             }
           }
         }
@@ -8398,7 +8400,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }
